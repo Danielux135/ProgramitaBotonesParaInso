@@ -1,0 +1,18 @@
+{
+    "ExecuteIl2cppModules": true,
+    "ExecuteJavaModules": true,
+    "Connection": {
+        "PackageName": "dsadsadasd",
+        "DirectConnection": false,
+        "ServerAddress": "dasdsadasdasd",
+        "ProxyRedirection": true,
+        "ProxyAddress": "3213123",
+        "ProxyPort": "8080",
+        "FilePaddingSoICanKeepMySanity": "----------------------------------------------------------------------------------------------------------------------------------"
+    },
+    "Trace": true,
+    "Dump": {
+        "Active": true,
+        "Path": "123"
+    }
+}
