@@ -28,12 +28,72 @@ def update_json():
     with open("config.json", "w") as json_file:
         json.dump(data, json_file, indent=4)
 
+def toggle_theme():
+    global IsDarkTheme
+
+    # Cambiar el valor del tema
+    IsDarkTheme = not IsDarkTheme
+
+    # Actualizar los colores de fondo y texto de los elementos
+    if IsDarkTheme:
+        # Modo oscuro
+        window.config(background="gray")
+        section1_frame.config(bg="gray")
+        section2_frame.config(bg="gray")
+        section3_frame.config(bg="gray")
+        label_section1.config(fg="gray")
+        label_section2.config(fg="gray")
+        label_section3.config(fg="gray")
+        button_save_changes.config(bg="gray", fg="white")
+        checkbutton1.config(bg="gray", fg="white")
+        checkbutton2.config(bg="gray", fg="white")
+        checkbutton3.config(bg="gray", fg="white")
+        checkbutton4.config(bg="gray", fg="white")
+        entry1_label.config(bg="gray", fg="white")
+        entry2_label.config(bg="gray", fg="white")
+        entry3_label.config(bg="gray", fg="white")
+        entry4_label.config(bg="gray", fg="white")
+        entry5_label.config(bg="gray", fg="white")
+        entry1.config(bg="gray", fg="white")
+        entry2.config(bg="gray", fg="white")
+        entry3.config(bg="gray", fg="white")
+        entry4.config(bg="gray", fg="white")
+        entry5.config(bg="gray", fg="white")
+        button_toggle_theme.config(bg="gray", fg="white")
+    else:
+        # Modo claro
+        window.config(background="white")
+        section1_frame.config(bg="white")
+        section2_frame.config(bg="white")
+        section3_frame.config(bg="white")
+        label_section1.config(fg="black")
+        label_section2.config(fg="black")
+        label_section3.config(fg="black")
+        button_save_changes.config(bg="lightgray", fg="black")
+        checkbutton1.config(bg="white", fg="black")
+        checkbutton2.config(bg="white", fg="black")
+        checkbutton3.config(bg="white", fg="black")
+        checkbutton4.config(bg="white", fg="black")
+        entry1_label.config(bg="white", fg="black")
+        entry2_label.config(bg="white", fg="black")
+        entry3_label.config(bg="white", fg="black")
+        entry4_label.config(bg="white", fg="black")
+        entry5_label.config(bg="white", fg="black")
+        entry1.config(bg="white", fg="black")
+        entry2.config(bg="white", fg="black")
+        entry3.config(bg="white", fg="black")
+        entry4.config(bg="white", fg="black")
+        entry5.config(bg="white", fg="black")
+        button_toggle_theme.config(bg="white", fg="black")
+
+
 # Crear la ventana principal
-window = tk.Tk()
+window = tk.Tk()    
 
 # Configurar la ventana
 window.title("Programa con botones seleccionables y campos de texto")
-window.geometry("190x560")
+window.geometry("200x600")
+window.resizable(True,True)
 window.grid_columnconfigure(0, weight=1)  # Ajustar el ancho de la columna principal
 
 # Variables para almacenar las opciones seleccionadas
@@ -41,6 +101,9 @@ DirectConnectionValue = tk.BooleanVar()
 ProxyRedirectionValue = tk.BooleanVar()
 TraceValue = tk.BooleanVar()
 ActiveValue = tk.BooleanVar()
+ThemeValue = tk.BooleanVar()
+IsDarkTheme = False
+
 
 # Variables para almacenar los valores de los campos de texto
 PackageNameValue = tk.StringVar()
@@ -48,6 +111,7 @@ ServerAddressValue = tk.StringVar()
 ProxyAddressValue = tk.StringVar()
 ProxyPortValue = tk.StringVar()
 PathValue = tk.StringVar()
+
 
 # Leer los datos del archivo JSON
 with open("config.json") as json_file:
@@ -58,6 +122,7 @@ DirectConnectionValue.set(data["Connection"]["DirectConnection"])
 ProxyRedirectionValue.set(data["Connection"]["ProxyRedirection"])
 TraceValue.set(data["Trace"])
 ActiveValue.set(data["Dump"]["Active"])
+ThemeValue.set(IsDarkTheme) 
 
 # Establecer los valores de los campos de texto
 PackageNameValue.set(data["Connection"]["PackageName"])
@@ -134,6 +199,11 @@ entry5.grid(row=3, column=0, sticky="w")
 button_save_changes = tk.Button(window, text="Guardar cambios", command=update_json)
 button_save_changes.grid(row=3, column=0, pady=20, sticky="we", columnspan=1)  # Centrar el botón
 button_save_changes.configure(width=2) 
+
+# Crear el botón para cambiar el tema
+button_toggle_theme = tk.Button(window, text="Cambiar tema", command=toggle_theme)
+button_toggle_theme.grid(row=4, column=0, pady=20, sticky="we", columnspan=1)  # Centrar el botón
+button_toggle_theme.configure(width=2)
 
 # Iniciar el bucle principal de la ventana
 window.mainloop()
